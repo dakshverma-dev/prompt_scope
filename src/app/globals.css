@@ -8,7 +8,7 @@
   --border-subtle: rgba(255, 255, 255, 0.05);
   --text: #f4f4f5;
   --muted: #8b8f9a;
-  --accent: #67d4ff;
+  --accent: #ffffff;
   --font-sans: var(--font-sans, Arial, Helvetica, sans-serif);
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -45,7 +45,7 @@ button:disabled {
 }
 
 ::selection {
-  background: rgba(103, 212, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
   color: #ffffff;
 }
 
@@ -113,24 +113,24 @@ button:disabled {
 }
 
 .icon-button:hover {
-  border-color: rgba(103, 212, 255, 0.3);
-  background: rgba(103, 212, 255, 0.08);
-  color: #67d4ff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
 }
 
 .primary-button {
   gap: 8px;
-  border: 1px solid rgba(103, 212, 255, 0.35);
-  background: #67d4ff;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: #ffffff;
   padding: 0 16px;
-  color: #07090d;
+  color: #000000;
   font-weight: 600;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .primary-button:hover {
-  background: #8fe0ff;
-  border-color: #8fe0ff;
+  background: #e4e4e7;
+  border-color: #e4e4e7;
 }
 
 .icon-button:active,
@@ -153,8 +153,8 @@ button:disabled {
 }
 
 .field:focus {
-  border-color: #67d4ff;
-  box-shadow: 0 0 0 2px rgba(103, 212, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .line-clamp-2 {

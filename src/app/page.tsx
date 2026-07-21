@@ -129,14 +129,14 @@ export default function Home() {
   }
 
   return (
-    <main className="app-shell min-h-[100dvh] overflow-hidden bg-[#07090d] text-zinc-100 selection:bg-[#67d4ff]/25 selection:text-white">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_70%_0%,rgba(103,212,255,0.06),transparent_42%),radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.035),transparent_35%)]" />
+    <main className="app-shell min-h-[100dvh] overflow-hidden bg-[#07090d] text-zinc-100 selection:bg-white/20 selection:text-white">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_70%_0%,rgba(255,255,255,0.035),transparent_42%),radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.025),transparent_35%)]" />
       <div className="relative flex min-h-[100dvh]">
         <aside className="hidden w-[248px] shrink-0 border-r border-white/[0.08] bg-[#090c12] p-4 lg:flex lg:flex-col lg:justify-between">
           <div>
             <div className="mb-8 flex items-center gap-3 px-1">
               <div className="grid size-9 place-items-center rounded-xl border border-white/[0.12] bg-white/[0.04]">
-                <Braces size={18} className="text-[#67d4ff]" />
+                <Braces size={18} className="text-white" />
               </div>
               <div>
                 <p className="m-0 text-xs font-semibold tracking-tight text-zinc-100">PromptScope</p>
@@ -151,7 +151,7 @@ export default function Home() {
               </div>
               <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]">
                 <motion.div
-                  className="h-full rounded-full bg-[#67d4ff]"
+                  className="h-full rounded-full bg-white"
                   animate={{ width: `${readiness}%` }}
                   transition={{ type: "spring", stiffness: 120, damping: 24 }}
                 />
@@ -165,7 +165,7 @@ export default function Home() {
                   className="group flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-medium text-zinc-400 transition hover:bg-white/[0.04] hover:text-zinc-100"
                 >
                   <span className="flex items-center gap-2.5">
-                    <Icon size={15} className="text-zinc-500 transition group-hover:text-[#67d4ff]" />
+                    <Icon size={15} className="text-zinc-500 transition group-hover:text-white" />
                     {label}
                   </span>
                   <span className="rounded-full border border-white/[0.06] bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] text-zinc-500">{meta}</span>
@@ -176,7 +176,7 @@ export default function Home() {
 
           <div className="rounded-xl border border-white/[0.07] bg-white/[0.015] p-3.5">
             <div className="mb-2 flex items-center gap-2 text-xs font-medium text-zinc-300">
-              <Sparkles size={14} className="text-[#67d4ff]" />
+              <Sparkles size={14} className="text-white" />
               <span>One Workflow</span>
             </div>
             <p className="m-0 text-[11px] leading-4 text-zinc-500">Write, analyze, optimize, test, and ship with ultra-low latency.</p>
@@ -234,7 +234,7 @@ function EditorPanel({ prompt, setPrompt, analysis }: { prompt: string; setPromp
     <section className="panel flex min-h-[420px] min-w-0 flex-col overflow-hidden xl:resize-x">
       <div className="toolbar">
         <div className="flex items-center gap-2 text-xs font-semibold tracking-tight text-zinc-200">
-          <Code2 size={15} className="text-[#67d4ff]" />
+          <Code2 size={15} className="text-white" />
           Main Editor
         </div>
         <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
@@ -285,10 +285,10 @@ function AnalysisPanel(props: {
     <aside className="panel flex min-h-[420px] min-w-0 flex-col overflow-hidden">
       <div className="toolbar">
         <div className="flex items-center gap-2 text-xs font-semibold tracking-tight text-zinc-200">
-          <SlidersHorizontal size={15} className="text-[#67d4ff]" />
+          <SlidersHorizontal size={15} className="text-white" />
           Right Analysis Panel
         </div>
-        <span className="rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-0.5 font-mono text-[10px] text-zinc-400">Local first</span>
+        <span className="rounded-full border border-white/[0.12] bg-white/[0.05] px-2.5 py-0.5 font-mono text-[10px] text-zinc-200">Local first</span>
       </div>
 
       <div className="border-b border-white/[0.08] bg-black/20 p-2.5">
@@ -299,7 +299,7 @@ function AnalysisPanel(props: {
               onClick={() => setActiveTab(id)}
               className={`flex h-7 items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition ${activeTab === id ? "border border-white/[0.08] bg-white/[0.12] text-white shadow-sm" : "text-zinc-400 hover:bg-white/[0.03] hover:text-zinc-200"}`}
             >
-              <Icon size={13} className={activeTab === id ? "text-[#67d4ff]" : "text-zinc-500"} />
+              <Icon size={13} className={activeTab === id ? "text-white" : "text-zinc-500"} />
               <span className="hidden sm:inline">{id}</span>
             </button>
           ))}
@@ -307,9 +307,16 @@ function AnalysisPanel(props: {
       </div>
 
       <div className="min-h-0 flex-1 overflow-auto p-4">
+        <div className="mb-3.5 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.02] px-3.5 py-2.5 font-mono text-[11px] text-zinc-300">
+          <span className="flex items-center gap-2">
+            <span className="inline-block size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+            Deterministic Engine Active
+          </span>
+          <span className="text-zinc-500">0ms latency</span>
+        </div>
         {apiError ? (
-          <div className="mb-3 rounded-xl border border-amber-300/20 bg-amber-300/[0.08] p-3 text-xs leading-5 text-amber-100">
-            Live OpenAI analysis is unavailable, so the deterministic profiler is active. {apiError}
+          <div className="mb-3 rounded-xl border border-white/[0.1] bg-white/[0.04] p-3 text-xs leading-5 text-zinc-300">
+            <span className="font-semibold text-white">Live API Fallback:</span> {apiError}
           </div>
         ) : null}
         <AnimatePresence mode="wait">
@@ -346,7 +353,7 @@ function Profiler({ analysis }: { analysis: PromptAnalysis }) {
           <div key={label} className="metric-card">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[11px] text-zinc-400">{label}</span>
-              <Icon size={14} className="text-[#67d4ff]" />
+              <Icon size={14} className="text-white" />
             </div>
             <p className="m-0 mt-3 font-mono text-lg font-semibold tracking-tight text-zinc-100">{value}</p>
           </div>
@@ -359,12 +366,12 @@ function Profiler({ analysis }: { analysis: PromptAnalysis }) {
           <span className="font-mono text-zinc-400">Complexity {analysis.complexity}%</span>
         </div>
         <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]">
-          <motion.div className="h-full rounded-full bg-[#67d4ff]" animate={{ width: `${analysis.complexity}%` }} />
+          <motion.div className="h-full rounded-full bg-white" animate={{ width: `${analysis.complexity}%` }} />
         </div>
         <div className="mt-4 space-y-2">
           {(analysis.redundantInstructions.length ? analysis.redundantInstructions : ["No severe redundancy detected."]).map((item) => (
             <div key={item} className="flex gap-2.5 rounded-lg border border-white/[0.06] bg-white/[0.015] p-3 text-xs leading-5 text-zinc-300">
-              <Circle size={8} className="mt-1.5 shrink-0 fill-[#67d4ff] text-[#67d4ff]" />
+              <Circle size={8} className="mt-1.5 shrink-0 fill-white text-white" />
               <span>{item}</span>
             </div>
           ))}
@@ -380,7 +387,7 @@ function SuggestionList({ suggestions }: { suggestions: PromptAnalysis["suggesti
   return (
     <section className="sub-panel">
       <div className="mb-3 flex items-center gap-2 text-xs font-semibold text-zinc-200">
-        <Lightbulb size={15} className="text-[#67d4ff]" />
+        <Lightbulb size={15} className="text-white" />
         <span>Optimization Suggestions</span>
       </div>
       <div className="space-y-2">
@@ -391,7 +398,7 @@ function SuggestionList({ suggestions }: { suggestions: PromptAnalysis["suggesti
                 <p className="m-0 text-xs font-medium text-zinc-200">{suggestion.title}</p>
                 <p className="m-0 mt-1 text-[11px] leading-4 text-zinc-400">{suggestion.detail}</p>
               </div>
-              <span className="shrink-0 rounded-full border border-[#67d4ff]/20 bg-[#67d4ff]/10 px-2 py-0.5 font-mono text-[10px] text-[#8fe0ff]">{suggestion.impact}</span>
+              <span className="shrink-0 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 font-mono text-[10px] text-white">{suggestion.impact}</span>
             </div>
           </div>
         ))}
@@ -439,7 +446,7 @@ function DiffBox({ title, tone, lines }: { title: string; tone: "red" | "green";
 
 function OutputCard({ title, text, active }: { title: string; text: string; active?: boolean }) {
   return (
-    <div className={`rounded-xl border p-3.5 ${active ? "border-[#67d4ff]/30 bg-[#67d4ff]/[0.04]" : "border-white/[0.07] bg-white/[0.015]"}`}>
+    <div className={`rounded-xl border p-3.5 ${active ? "border-white/40 bg-white/[0.06]" : "border-white/[0.07] bg-white/[0.015]"}`}>
       <p className="m-0 font-mono text-[11px] font-semibold text-zinc-400">{title}</p>
       <p className="m-0 mt-2 text-xs leading-5 text-zinc-300">{text}</p>
     </div>
@@ -493,7 +500,7 @@ function Optimize({ analysis, prompt }: { analysis: PromptAnalysis; prompt: stri
       <section className="sub-panel">
         <div className="flex items-center justify-between">
           <h2 className="text-xs font-semibold text-zinc-200">One Click Optimize</h2>
-          <span className="rounded-full border border-[#67d4ff]/20 bg-[#67d4ff]/10 px-2.5 py-0.5 font-mono text-[10px] text-[#8fe0ff]">+{analysis.improvementScore} score</span>
+          <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 font-mono text-[10px] text-white">+{analysis.improvementScore} score</span>
         </div>
         <div className="mt-4 space-y-3">
           <PromptBlock title="Before" text={prompt} />
@@ -510,7 +517,7 @@ function Optimize({ analysis, prompt }: { analysis: PromptAnalysis; prompt: stri
 
 function PromptBlock({ title, text, active }: { title: string; text: string; active?: boolean }) {
   return (
-    <div className={`rounded-xl border p-3.5 ${active ? "border-[#67d4ff]/30 bg-[#67d4ff]/[0.035]" : "border-white/[0.07] bg-white/[0.015]"}`}>
+    <div className={`rounded-xl border p-3.5 ${active ? "border-white/40 bg-white/[0.06]" : "border-white/[0.07] bg-white/[0.015]"}`}>
       <p className="m-0 mb-2 font-mono text-[11px] font-semibold text-zinc-400">{title}</p>
       <pre className="m-0 max-h-44 overflow-auto whitespace-pre-wrap font-mono text-xs leading-5 text-zinc-300">{text}</pre>
     </div>
@@ -523,7 +530,7 @@ function Timeline({ analysis, activeStage, runId, loading }: { analysis: PromptA
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
-            <Activity size={13} className="text-[#67d4ff]" />
+            <Activity size={13} className="text-white" />
             <span>run #{String(runId).padStart(3, "0")}</span>
           </div>
           <h2 className="m-0 mt-1 text-xs font-semibold text-zinc-200">Prompt Timeline</h2>
@@ -535,7 +542,7 @@ function Timeline({ analysis, activeStage, runId, loading }: { analysis: PromptA
       <div className="relative grid grid-cols-2 gap-2.5 md:grid-cols-7">
         <div className="absolute left-4 right-4 top-[24px] hidden h-px bg-white/[0.08] md:block" />
         <motion.div
-          className="absolute left-4 top-[24px] hidden h-px bg-[#67d4ff] md:block"
+          className="absolute left-4 top-[24px] hidden h-px bg-white md:block"
           animate={{ width: `${(activeStage / Math.max(1, analysis.timeline.length - 1)) * 100}%` }}
           transition={{ type: "spring", stiffness: 100, damping: 24 }}
         />
@@ -545,11 +552,11 @@ function Timeline({ analysis, activeStage, runId, loading }: { analysis: PromptA
           return (
             <motion.div
               key={stage.id}
-              className={`relative rounded-xl border p-3.5 transition-all ${done ? "border-[#67d4ff]/35 bg-[#67d4ff]/[0.04]" : "border-white/[0.07] bg-white/[0.015]"}`}
+              className={`relative rounded-xl border p-3.5 transition-all ${done ? "border-white/35 bg-white/[0.06]" : "border-white/[0.07] bg-white/[0.015]"}`}
               animate={{ y: current ? -3 : 0, opacity: done ? 1 : 0.5 }}
               transition={{ type: "spring", stiffness: 180, damping: 18 }}
             >
-              <div className={`mb-3 grid size-6 place-items-center rounded-full border ${done ? "border-[#67d4ff]/40 bg-[#67d4ff]/15 text-[#8fe0ff]" : "border-white/[0.08] bg-black/40 text-zinc-600"}`}>
+              <div className={`mb-3 grid size-6 place-items-center rounded-full border ${done ? "border-white/40 bg-white/15 text-white" : "border-white/[0.08] bg-black/40 text-zinc-600"}`}>
                 {done ? <CheckCircle2 size={13} /> : <Circle size={10} />}
               </div>
               <p className="m-0 text-xs font-semibold leading-4 text-zinc-200">{stage.title}</p>
