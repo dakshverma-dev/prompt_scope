@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #090d16;
-  --panel: rgba(15, 23, 42, 0.85);
-  --panel-strong: rgba(15, 23, 42, 0.95);
-  --border: rgba(255, 255, 255, 0.12);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #38bdf8;
+  --bg: #07090d;
+  --panel: rgba(11, 14, 20, 0.94);
+  --panel-strong: rgba(14, 18, 26, 0.98);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --text: #f4f4f5;
+  --muted: #8b8f9a;
+  --accent: #67d4ff;
   --font-sans: var(--font-sans, Arial, Helvetica, sans-serif);
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -26,6 +26,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -44,7 +45,7 @@ button:disabled {
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.3);
+  background: rgba(103, 212, 255, 0.25);
   color: #ffffff;
 }
 
@@ -55,15 +56,15 @@ button:disabled {
 .panel {
   border: 1px solid var(--border);
   border-radius: 16px;
-  background: var(--panel);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  background: #0b0e14;
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.45);
 }
 
 .sub-panel,
 .metric-card {
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   transition: border-color 160ms ease, background 160ms ease;
 }
 
@@ -78,52 +79,58 @@ button:disabled {
 
 .toolbar {
   display: flex;
-  min-height: 54px;
+  min-height: 50px;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid var(--border);
   padding: 0 16px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.012);
 }
 
 .icon-button,
 .primary-button {
   display: inline-flex;
-  height: 38px;
+  height: 36px;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 13px;
   font-weight: 500;
-  transition: all 150ms ease;
+  transition:
+    transform 140ms ease,
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease;
 }
 
 .icon-button {
-  width: 38px;
+  width: 36px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
-  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.03);
+  color: #a1a1aa;
 }
 
 .icon-button:hover {
-  border-color: var(--accent);
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
+  border-color: rgba(103, 212, 255, 0.3);
+  background: rgba(103, 212, 255, 0.08);
+  color: #67d4ff;
 }
 
 .primary-button {
   gap: 8px;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  background: linear-gradient(135deg, #38bdf8, #0284c7);
-  padding: 0 18px;
-  color: #ffffff;
+  border: 1px solid rgba(103, 212, 255, 0.35);
+  background: #67d4ff;
+  padding: 0 16px;
+  color: #07090d;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .primary-button:hover {
-  background: linear-gradient(135deg, #7dd3fc, #0369a1);
+  background: #8fe0ff;
+  border-color: #8fe0ff;
 }
 
 .icon-button:active,
@@ -135,19 +142,19 @@ button:disabled {
   width: 100%;
   resize: vertical;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
   padding: 10px 12px;
-  color: #f1f5f9;
-  font-size: 14px;
-  line-height: 22px;
+  color: #e4e4e7;
+  font-size: 13px;
+  line-height: 20px;
   outline: none;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 
 .field:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+  border-color: #67d4ff;
+  box-shadow: 0 0 0 2px rgba(103, 212, 255, 0.12);
 }
 
 .line-clamp-2 {
@@ -160,25 +167,28 @@ button:disabled {
 .monaco-editor,
 .monaco-editor-background,
 .monaco-editor .inputarea.ime-input {
-  background-color: rgba(15, 23, 42, 0.95) !important;
+  background-color: #0b0e14 !important;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
+  background-clip: padding-box;
 }
 
 @media (max-width: 1279px) {
