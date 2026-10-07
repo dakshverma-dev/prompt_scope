@@ -1,38 +1,85 @@
 # PromptScope
 
-**DevTools for prompt engineering.** Write a prompt, inspect its execution story, compare revisions, validate behavior, and ship with confidence.
+**Inspect the prompt. Compare the revision. Understand the change.**
 
-## Build-week MVP
+PromptScope is a developer-tool MVP for editing prompts, inspecting instruction signals, reviewing suggested changes, and comparing revisions in one workspace.
 
-- Animated **Prompt Timeline**: parse → assemble context → evaluate output
-- Monaco prompt editor
-- Prompt Diff with an explicit grounding fallback improvement
-- Prompt Tests with pass/fail behavioral checks
-- Optimization suggestions, quality score, tokens, cost, and latency
-- OpenAI Responses API route with a graceful demo-data fallback when no API key is configured
+[Open demo](https://prompt-scope-swart.vercel.app) · [Run locally](#run-locally) · [How analysis works](#how-analysis-works)
+
+## Inside the workspace
+
+- **Editor:** Monaco-based prompt editing.
+- **Timeline:** an animated illustration of parsing, context assembly, and evaluation.
+- **Diff:** review the proposed prompt against the original.
+- **Checks:** inspect format, grounding, tone, and missing-context instructions.
+- **Suggestions:** identify overlapping instructions and add clearer output or fallback requirements.
+
+## How analysis works
+
+The local analyzer checks the prompt text for instruction patterns. It produces a heuristic score, suggestions, an optimized version, and pass/fail indicators.
+
+With a configured provider, the API also requests model-generated analysis and merges the response with the local result. If the request fails, it returns local analysis with `demo: true`.
+
+| Signal | What it means in this MVP |
+| --- | --- |
+| Prompt checks | Instruction-pattern checks, not executed behavioral tests against model outputs |
+| Token counts and cost | Estimates from text length and constants in the local analyzer |
+| Timeline and latency | Illustrative stages and estimated durations, not measured execution traces |
+| Quality score | A heuristic or model-provided assessment, not a calibrated benchmark |
 
 ## Run locally
 
+Use Node.js 20.9 or later and npm.
+
 ```bash
-npm install
-copy .env.example .env.local
+git clone https://github.com/dakshverma-dev/prompt_scope.git
+cd prompt_scope
+npm ci
 npm run dev
 ```
 
-Set `OPENAI_API_KEY` in `.env.local` to run live analysis. Without a key, the app remains fully demoable with curated data.
+Open [localhost:3000](http://localhost:3000). Local analysis works without an API key. Create `.env.local` only if you want provider-backed analysis; the repository currently has no `.env.example`.
 
-## Deploy to Vercel
+Choose one provider configuration:
 
-1. Push this folder to a Git repository and import it in Vercel.
-2. Add `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`) in Project Settings → Environment Variables.
-3. Deploy with the standard Next.js preset.
+```env
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_MODEL=gpt-4.1-mini
+```
 
-## 3-minute demo
+```env
+# OpenRouter
+OPENROUTER_API_KEY=your_openrouter_api_key
+OPENROUTER_MODEL=openai/gpt-4o-mini
+```
 
-1. Start with the Q2 investor prompt, then press **Analyze prompt**.
-2. Walk through the Prompt Timeline and point to the quality/cost snapshot.
-3. Open **Optimize** and describe the grounding fallback suggestion.
-4. Open **Prompt Diff** to show the exact safety improvement.
-5. Finish in **Prompt Tests**: three checks pass; one makes the risk visible before deployment.
+When both keys are set, the route selects OpenRouter. An OpenAI-compatible endpoint can also be supplied through `OPENAI_BASE_URL`. Provider keys are read in the server API route.
 
-**Tagline:** Prompt engineering deserves the same debugging tools software engineers already have.
+## Three-minute walkthrough
+
+1. Open the supplied investor-report prompt.
+2. Select **Analyze prompt** and inspect the suggested changes.
+3. Compare the original and optimized prompt in the diff.
+4. Inspect the grounding and missing-context checks.
+5. Change the prompt and repeat to see how the local checks respond.
+
+## Source tour
+
+| File | Responsibility |
+| --- | --- |
+| [Workspace](src/app/page.tsx) | Editor, timeline, diff, and checks |
+| [Analysis route](src/app/api/analyze/route.ts) | Provider selection, requests, and fallback |
+| [Local analyzer](src/lib/prompt-analysis.ts) | Instruction-pattern checks and estimates |
+| [Demo content](src/lib/demo.ts) | Initial prompts and workspace data |
+
+**Stack:** Next.js 16, React 19, TypeScript, Monaco, Motion, and the OpenAI SDK.
+
+## Build
+
+```bash
+npm run build
+npm run start
+```
+
+The repository also provides `npm run lint`. Output-based evaluation, measured provider telemetry, and persisted experiments are future extensions.
